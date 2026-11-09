@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="th" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍌 Banana Cake Master Dashboard</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font: Inter & Kanit -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Kanit', 'Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        banana: {
+                            50: '#fefce8',
+                            100: '#fef9c3',
+                            200: '#fef08a',
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                            700: '#a16207',
+                            800: '#854d0e',
+                            900: '#713f12',
+                        },
+                        baking: {
+                            cream: '#fdfbf7',
+                            sand: '#f5ebe0',
+                            warm: '#d5bdaf',
+                            brown: '#8d6e63',
+                            dark: '#4e342e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Kanit', 'Inter', sans-serif;
+            background-color: #fcfaf5;
+            color: #4e342e;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(213, 189, 175, 0.3);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f5ebe0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d5bdaf;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8d6e63;
+        }
+    </style>
+</head>
+<body class="min-h-full flex flex-col selection:bg-banana-300 selection:text-banana-900">
+
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-amber-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-gradient-to-tr from-banana-400 to-amber-500 rounded-2xl flex items-center justify-center shadow-md shadow-amber-500/20 text-2xl">
+                    🍌
+                </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-amber-800 to-amber-600 bg-clip-text text-transparent">
+                        Banana Cake Master
+                    </h1>
+                    <p class="text-xs text-amber-700 font-medium">สูตรเค้กกล้วยหอมเนื้อนุ่มฟู หน้าแตกสวย อร่อยทำง่าย</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button onclick="scrollToSection('timer-section')" class="hidden sm:flex items-center space-x-2 bg-amber-100 hover:bg-amber-200 text-amber-900 px-4 py-2 rounded-xl text-sm font-semibold transition-all shadow-sm">
+                    <i class="fa-solid fa-stopwatch text-amber-600"></i>
+                    <span>ตัวจับเวลาอบ</span>
+                </button>
+                <button onclick="window.print()" class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all shadow-md shadow-amber-500/20 flex items-center space-x-2">
+                    <i class="fa-solid fa-print"></i>
+                    <span class="hidden sm:inline">พิมพ์สูตรอาหาร</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+        <!-- Hero Banner Grid -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+            <!-- Hero Card with Illustration -->
+            <div class="lg:col-span-2 relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-500 via-amber-600 to-amber-800 text-white p-8 sm:p-10 shadow-xl flex flex-col justify-between">
+                <div class="absolute -right-10 -bottom-10 opacity-15 pointer-events-none text-9xl">
+                    🧁
+                </div>
+                <div class="relative z-10">
+                    <div class="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider text-amber-100 mb-4">
+                        <span class="w-2 h-2 rounded-full bg-banana-300 animate-pulse"></span>
+                        <span>สูตรยอดนิยม • สูตรสำเร็จหน้าแตก</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3">เค้กกล้วยหอมโฮมเมด เนื้อฉ่ำ กลิ่นหอมละมุน</h2>
+                    <p class="text-amber-100 text-sm sm:text-base max-w-xl leading-relaxed">
+                        เคล็ดลับการใช้กล้วยหอมสุกงอม ผสมผสานเทคนิคการอบไฟแรงช่วงแรกดันหน้าแตกสวยงาม และลดไฟให้เนื้อในนุ่มฟูละลายในปาก
+                    </p>
+                </div>
+                <div class="relative z-10 mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-white/20">
+                    <div class="bg-white/10 backdrop-blur-sm p-3 rounded-2xl text-center">
+                        <div class="text-xs text-amber-200">เวลาเตรียม</div>
+                        <div class="text-lg font-bold">20 นาที</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm p-3 rounded-2xl text-center">
+                        <div class="text-xs text-amber-200">เวลาอบ</div>
+                        <div class="text-lg font-bold">25 นาที</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm p-3 rounded-2xl text-center">
+                        <div class="text-xs text-amber-200">จำนวนที่ได้</div>
+                        <div class="text-lg font-bold">15-18 ชิ้น</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm p-3 rounded-2xl text-center">
+                        <div class="text-xs text-amber-200">ระดับความยาก</div>
+                        <div class="text-lg font-bold">ง่ายมาก ✨</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Timer Mini Widget -->
+            <div id="timer-section" class="glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-sm border border-amber-200/50 bg-gradient-to-b from-white to-amber-50/50">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-lg text-amber-900 flex items-center space-x-2">
+                            <i class="fa-solid fa-stopwatch text-amber-600"></i>
+                            <span>ตัวจับเวลาอบเค้ก</span>
+                        </h3>
+                        <span class="text-xs bg-amber-100 text-amber-800 px-2.5 py-1 rounded-lg font-medium">Baking Timer</span>
+                    </div>
+                    <p class="text-xs text-amber-800 mb-6">เลือกตั้งเวลาอบตามขั้นตอนของคุณ เพื่อความแม่นยำสูงสุด</p>
+                    
+                    <!-- Timer Display -->
+                    <div class="text-center bg-amber-900 text-amber-100 py-6 rounded-2xl shadow-inner mb-6">
+                        <div id="timer-display" class="text-4xl sm:text-5xl font-mono font-bold tracking-wider">25:00</div>
+                        <div id="timer-status" class="text-xs text-amber-300 mt-1 uppercase tracking-widest font-medium">พร้อมเริ่มอบ</div>
+                    </div>
+                </div>
+
+                <!-- Timer Controls -->
+                <div class="space-y-3">
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="setTimer(10)" class="bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-semibold py-2 rounded-xl transition">10 นาที (ไฟแรง)</button>
+                        <button onclick="setTimer(15)" class="bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-semibold py-2 rounded-xl transition">15 นาที (ไฟอ่อน)</button>
+                        <button onclick="setTimer(25)" class="bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-semibold py-2 rounded-xl transition">25 นาที (ทั้งหมด)</button>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button id="timer-start-btn" onclick="toggleTimer()" class="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 rounded-xl shadow-md shadow-amber-600/20 transition flex items-center justify-center space-x-2">
+                            <i id="timer-icon" class="fa-solid fa-play"></i>
+                            <span id="timer-btn-text">เริ่มจับเวลา</span>
+                        </button>
+                        <button onclick="resetTimer()" class="bg-stone-200 hover:bg-stone-300 text-stone-700 font-semibold px-4 py-3 rounded-xl transition">
+                            <i class="fa-solid fa-rotate-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Dashboard Split: Ingredients & Steps -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Left Column: Ingredients (4 Cols) -->
+            <div class="lg:col-span-5 space-y-6">
+                <div class="glass-card rounded-3xl p-6 sm:p-8 shadow-sm">
+                    <div class="flex items-center justify-between mb-6 pb-4 border-b border-stone-100">
+                        <div>
+                            <h3 class="text-xl font-bold text-amber-900 flex items-center space-x-2">
+                                <i class="fa-solid fa-basket-shopping text-amber-600"></i>
+                                <span>วัตถุดิบและส่วนผสม</span>
+                            </h3>
+                            <p class="text-xs text-stone-500 mt-1">ปรับสัดส่วนปริมาณตามต้องการได้</p>
+                        </div>
+                        <!-- Scale Multiplier -->
+                        <div class="flex items-center space-x-1 bg-amber-50 p-1.5 rounded-xl border border-amber-200">
+                            <button onclick="changeScale(1)" id="scale-1" class="px-2.5 py-1 text-xs font-bold rounded-lg bg-amber-500 text-white shadow-sm transition">1x</button>
+                            <button onclick="changeScale(1.5)" id="scale-1.5" class="px-2.5 py-1 text-xs font-bold rounded-lg text-amber-900 hover:bg-amber-200 transition">1.5x</button>
+                            <button onclick="changeScale(2)" id="scale-2" class="px-2.5 py-1 text-xs font-bold rounded-lg text-amber-900 hover:bg-amber-200 transition">2x</button>
+                        </div>
+                    </div>
+
+                    <!-- Ingredients List -->
+                    <div class="space-y-4">
+                        <div class="text-xs font-bold text-amber-800 uppercase tracking-wider mb-2">🍌 ส่วนผสมหลัก</div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-stone-50 rounded-2xl hover:bg-amber-50/50 transition border border-stone-100">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-xl bg-banana-200 flex items-center justify-center text-amber-900 text-sm font-bold">1</div>
+                                <div>
+                                    <span class="font-semibold text-stone-800 text-sm">กล้วยหอมสุกงอม</span>
+                                    <p class="text-xs text-stone-500">เปลือกมีจุดดำ ยิ่งงอมยิ่งหอมหวาน</p>
+                                </div>
+                            </div>
+                            <span class="font-mono font-bold text-amber-700 bg-amber-100/60 px-3 py-1 rounded-xl text-sm" data-base="225" data-unit="กรัม">225 กรัม</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-stone-50 rounded-2xl hover:bg-amber-50/50 transition border border-stone-100">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-xl bg-banana-200 flex items-center justify-center text-amber-900 text-sm font-bold">2</div>
+                                <div>
+                                    <span class="font-semibold text-stone-800 text-sm">น้ำมะนาว</span>
+                                    <p class="text-xs text-stone-500">กันกล้วยดำและช่วยให้ขึ้นฟู</p>
+                                </div>
+                            </div>
+                            <span class="font-mono font-bold text-amber-700 bg-amber-100/60 px-3 py-1 rounded-xl text-sm" data-base="1" data-unit="ช้อนชา">1 ช้อนชา</span>
+                        </div>
+
+                        <div class="text-xs font-bold text-amber-800 uppercase tracking-wider pt-3 mb-2">🌾 ของแห้ง (ร่อนรวมกัน)</div>
+
+                        <div class="flex items-center justify-between p-3 bg-stone-50 rounded-2xl hover:bg-amber-50/50 transition border border-stone-100">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-xl bg-amber-100 flex items-center justify-center text-amber-900 text-sm font-bold">3</div>
+                                <span class="font-semibold text-stone-800 text-sm">แป้งเค้ก (หรือแป้งอเนกประสงค์)</span>
+                            </div>
+                            <span class="font-mono font-bold text-amber-700 bg-amber-100/60 px-3 py-1 rounded-xl text-sm" data-base="200" data-unit="กรัม">200 กรัม</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-stone-50 rounded-2xl hover:bg-amber-50/50 transition border border-stone-100">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-xl bg-amber-100 flex items-center justify-center text-amber-900 text-sm font-bold">4</div>
+                                <span class="font-semibold text-stone-800 text-sm">ผงฟู</span>
+                            </div>
+                            <span class="font-mono font-bold text-amber-700 bg-amber-100/60 px-3 py-1 rounded-xl text-sm" data-base="1.5" data-unit="ช้อนชา">1.5 ช้อนชา</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-stone-50 rounded-2xl hover:bg-amber-50/50 transition border border-stone-100">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-xl bg-amber-100 flex items-center justify-center text-amber-900 text-sm font-bold">5</div>
+                                <span class="font-semibold text-stone-800 text-sm">เบกกิ้งโซดา</span>
+                            </div>
+                            <span class="font-mono font-bold text-amber-700 bg-amber-100/60 px-3 py-1 rounded-xl text-sm" data-base="1" data-unit="ช้อนชา">1 ช้อนชา</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-stone-50 rounded-2xl hover:bg-amber-50/50 transition border border-stone-100">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-xl bg-amber-100 flex items-center justify-center text-amber-900 text-sm font-bold">6</div>
+                                <span class="font-semibold text-stone-800 text-sm">เกลือป่น</span>
+                            </div>
+                            <span class="font-mono font-bold text-amber-700 bg-amber-100/60 px-3 py-1 rounded-xl text-sm" data-base="0.5" data-unit="ช้อนชา">0.5 ช้อนชา</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-stone-50 rounded-2xl hover:bg-amber-50/50 transition border border-stone-100">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-xl bg-amber-100 flex items-center justify-center text-amber-900 text-sm font-bold">7</div>
+                                <span class="font-semibold text-stone-800 text-sm">น้ำตาลทราย</span>
+                            </div>
+                            <span class="font-mono font-bold text-amber-700 bg-amber-100/60 px-3 py-1 rounded-xl text-sm" data-base="165" data-unit="กรัม">165 กรัม</span>
+                        </div>
+
+                        <div class="text-xs font-bold text-amber-800 uppercase tracking-wider pt-3 mb-2">🥚 ของเหลวและไข่</div>
+
+                        <div class="flex items-center justify-between p-3 bg-stone-50 rounded-2xl hover:bg-amber-50/50 transition border border-stone-100">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-xl bg-amber-200 flex items-center justify-center text-amber-900 text-sm font-bold">8</div>
+                                <span class="font-semibold text-stone-800 text-sm">ไข่ไก่ (เบอร์ 1 หรือ 2)</span>
+                            </div>
+                            <span class="font-mono font-bold text-amber-700 bg-amber-100/60 px-3 py-1 rounded-xl text-sm" data-base="3" data-unit="ฟอง">3 ฟอง</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-stone-50 rounded-2xl hover:bg-amber-50/50 transition border border-stone-100">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-xl bg-amber-200 flex items-center justify-center text-amber-900 text-sm font-bold">9</div>
+                                <div>
+                                    <span class="font-semibold text-stone-800 text-sm">น้ำมันพืช</span>
+                                    <p class="text-xs text-stone-500">น้ำมันรำข้าวหรือถั่วเหลือง</p>
+                                </div>
+                            </div>
+                            <span class="font-mono font-bold text-amber-700 bg-amber-100/60 px-3 py-1 rounded-xl text-sm" data-base="175" data-unit="มล.">175 มล.</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-stone-50 rounded-2xl hover:bg-amber-50/50 transition border border-stone-100">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-xl bg-amber-200 flex items-center justify-center text-amber-900 text-sm font-bold">10</div>
+                                <span class="font-semibold text-stone-800 text-sm">กลิ่นวานิลลา</span>
+                            </div>
+                            <span class="font-mono font-bold text-amber-700 bg-amber-100/60 px-3 py-1 rounded-xl text-sm" data-base="1" data-unit="ช้อนชา">1 ช้อนชา</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Baker Tips Card -->
+                <div class="bg-gradient-to-br from-amber-100 to-amber-200/60 rounded-3xl p-6 sm:p-8 border border-amber-300 shadow-sm">
+                    <h4 class="font-bold text-amber-900 flex items-center space-x-2 mb-3">
+                        <i class="fa-solid fa-lightbulb text-amber-600"></i>
+                        <span>เคล็ดลับลับฉบับมือโปร</span>
+                    </h4>
+                    <ul class="space-y-2 text-sm text-amber-950">
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-check text-amber-700 mt-1"></i>
+                            <span><b>พักแป้งในตู้เย็น 30 นาที</b> ก่อนอบ จะช่วยให้หน้าขนมแตกสวยและเนื้อฟูเนียนยิ่งขึ้น</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-check text-amber-700 mt-1"></i>
+                            <span><b>วอร์มเตาอบให้ร้อนจัด</b> ช่วง 10 นาทีแรกที่อบไฟสูงจะช่วยดันหน้าเค้กให้แตกสวยงาม</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Column: Step by Step Guide (7 Cols) -->
+            <div class="lg:col-span-7 space-y-6">
+                <div class="glass-card rounded-3xl p-6 sm:p-8 shadow-sm">
+                    <div class="flex items-center justify-between mb-6 pb-4 border-b border-stone-100">
+                        <div>
+                            <h3 class="text-xl font-bold text-amber-900 flex items-center space-x-2">
+                                <i class="fa-solid fa-list-check text-amber-600"></i>
+                                <span>ขั้นตอนการทำอย่างละเอียด</span>
+                            </h3>
+                            <p class="text-xs text-stone-500 mt-1">ทำตามทีละขั้นตอนเพื่อผลลัพธ์ที่สมบูรณ์แบบ</p>
+                        </div>
+                        <span class="text-xs font-semibold bg-amber-500 text-white px-3 py-1.5 rounded-xl">6 ขั้นตอนง่ายๆ</span>
+                    </div>
+
+                    <!-- Steps Timeline -->
+                    <div class="space-y-6 relative before:absolute before:inset-0 before:left-6 before:w-0.5 before:bg-amber-200">
+                        
+                        <!-- Step 1 -->
+                        <div class="relative flex items-start space-x-4 group">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-500 text-white font-bold flex items-center justify-center shadow-md shadow-amber-500/20 z-10 shrink-0">
+                                01
+                            </div>
+                            <div class="flex-1 bg-stone-50 rounded-2xl p-5 border border-stone-100 hover:border-amber-300 transition shadow-sm">
+                                <h4 class="font-bold text-amber-900 text-base mb-1">เตรียมกล้วยหอม</h4>
+                                <p class="text-sm text-stone-600 leading-relaxed mb-3">
+                                    ปอกเปลือกกล้วยหอม หั่นเป็นแว่นๆ ใส่ชามแล้วใช้ส้อมหรือที่บดบดให้ละเอียดตามชอบ (ชอบให้มีเนื้อสัมผัสเคี้ยวเพลินให้บดหยาบ) เติมน้ำมะนาว 1 ช้อนชา คนให้เข้ากันแล้วพักไว้
+                                </p>
+                                <div class="flex items-center space-x-2 text-xs text-amber-800 bg-amber-100/60 p-2.5 rounded-xl">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    <span>น้ำมะนาวช่วยป้องกันไม่ให้กล้วยเปลี่ยนเป็นสีดำและช่วยให้ขึ้นฟู</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="relative flex items-start space-x-4 group">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-500 text-white font-bold flex items-center justify-center shadow-md shadow-amber-500/20 z-10 shrink-0">
+                                02
+                            </div>
+                            <div class="flex-1 bg-stone-50 rounded-2xl p-5 border border-stone-100 hover:border-amber-300 transition shadow-sm">
+                                <h4 class="font-bold text-amber-900 text-base mb-1">ร่อนแป้งและของแห้ง</h4>
+                                <p class="text-sm text-stone-600 leading-relaxed mb-3">
+                                    นำแป้งเค้ก ผงฟู และเบกกิ้งโซดา มาร่อนผ่านตะแกรง 1-2 รอบ จากนั้นเติมเกลือป่นและน้ำตาลทรายลงไป ใช้ตะกร้อมือคนส่วนผสมของแห้งทั้งหมดให้เข้ากันดี
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="relative flex items-start space-x-4 group">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-500 text-white font-bold flex items-center justify-center shadow-md shadow-amber-500/20 z-10 shrink-0">
+                                03
+                            </div>
+                            <div class="flex-1 bg-stone-50 rounded-2xl p-5 border border-stone-100 hover:border-amber-300 transition shadow-sm">
+                                <h4 class="font-bold text-amber-900 text-base mb-1">ผสมไข่และน้ำมันพืช</h4>
+                                <p class="text-sm text-stone-600 leading-relaxed mb-3">
+                                    ตอกไข่ไก่ใส่ชามผสม เติมกลิ่นวานิลลา ตีด้วยตะกร้อมือหรือเครื่องตีไฟฟ้าจนไข่ฟูและมีสีนวลขึ้น ค่อยๆ เทน้ำมันพืชลงไปเป็นสายพร้อมกับตีผสมจนเข้ากันดีจนเนื้อเนียนข้น
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="relative flex items-start space-x-4 group">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-500 text-white font-bold flex items-center justify-center shadow-md shadow-amber-500/20 z-10 shrink-0">
+                                04
+                            </div>
+                            <div class="flex-1 bg-stone-50 rounded-2xl p-5 border border-stone-100 hover:border-amber-300 transition shadow-sm">
+                                <h4 class="font-bold text-amber-900 text-base mb-1">รวมส่วนผสมทั้งหมด</h4>
+                                <p class="text-sm text-stone-600 leading-relaxed mb-3">
+                                    เทส่วนผสมของไข่ลงในชามแป้งคนพอเข้ากัน จากนั้นใส่กล้วยหอมบดลงไป แบ่งใส่สัก 2 รอบแล้วคนตะล่อมเบาๆ ด้วยตะกร้อมือจนเป็นเนื้อเดียวกัน (แนะนำพักแป้งในตู้เย็น 30 นาที)
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="relative flex items-start space-x-4 group">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-600 text-white font-bold flex items-center justify-center shadow-md shadow-amber-600/20 z-10 shrink-0">
+                                05
+                            </div>
+                            <div class="flex-1 bg-amber-50/80 rounded-2xl p-5 border border-amber-200 transition shadow-sm">
+                                <h4 class="font-bold text-amber-900 text-base mb-1">เทใส่พิมพ์และแต่งหน้า</h4>
+                                <p class="text-sm text-amber-950 leading-relaxed mb-3">
+                                    ตักส่วนผสมใส่กระทงกระดาษในพิมพ์ประมาณ 3/4 ของพิมพ์ โรยหน้าด้วยอัลมอนด์สไลซ์หรือช็อกโกแลตชิพตามชอบ
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Step 6 -->
+                        <div class="relative flex items-start space-x-4 group">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-800 text-white font-bold flex items-center justify-center shadow-md shadow-amber-800/20 z-10 shrink-0">
+                                06
+                            </div>
+                            <div class="flex-1 bg-amber-50/80 rounded-2xl p-5 border border-amber-200 transition shadow-sm">
+                                <h4 class="font-bold text-amber-900 text-base mb-1">อบด้วยเทคนิคพิเศษ</h4>
+                                <p class="text-sm text-amber-950 leading-relaxed mb-3">
+                                    วอร์มเตาอบที่ <b>200-210°C</b> อบไฟบน-ล่าง <b>10 นาทีแรก</b> (เพื่อให้หน้าแตกสวย) จากนั้นลดไฟเหลือ <b>170-180°C</b> อบต่ออีก 12-15 นาที ใช้ไม้จิ้มฟันเช็คความสุก นำมาพักบนตะแกรงจนเย็น
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-amber-100 mt-16 py-8 text-center text-xs text-amber-800">
+        <p>🍌 Banana Cake Master Dashboard • ออกแบบด้วยความอบอุ่นเพื่อคนรักการทำขนม</p>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        // Ingredient Scaler
+        let currentScale = 1;
+
+        function changeScale(scale) {
+            currentScale = scale;
+            
+            // Update active button styles
+            ['1', '1.5', '2'].forEach(s => {
+                const btn = document.getElementById(`scale-${s}`);
+                if (s == scale) {
+                    btn.className = "px-2.5 py-1 text-xs font-bold rounded-lg bg-amber-500 text-white shadow-sm transition";
+                } else {
+                    btn.className = "px-2.5 py-1 text-xs font-bold rounded-lg text-amber-900 hover:bg-amber-200 transition";
+                }
+            });
+
+            // Update ingredients values
+            document.querySelectorAll('[data-base]').forEach(el => {
+                const base = parseFloat(el.getAttribute('data-base'));
+                const unit = el.getAttribute('data-unit');
+                let newVal = base * scale;
+                
+                // Format nicely (e.g. integer or clean decimal)
+                if (newVal % 1 !== 0) {
+                    newVal = newVal.toFixed(1);
+                }
+                
+                el.textContent = `${newVal} ${unit}`;
+            });
+        }
+
+        // Timer Logic
+        let timerInterval = null;
+        let totalSeconds = 25 * 60;
+        let isRunning = false;
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            document.getElementById('timer-display').textContent = 
+                `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        function setTimer(minutes) {
+            pauseTimer();
+            totalSeconds = minutes * 60;
+            updateTimerDisplay();
+            document.getElementById('timer-status').textContent = `ตั้งเวลา ${minutes} นาที`;
+        }
+
+        function toggleTimer() {
+            if (isRunning) {
+                pauseTimer();
+            } else {
+                startTimer();
+            }
+        }
+
+        function startTimer() {
+            if (totalSeconds <= 0) return;
+            isRunning = true;
+            document.getElementById('timer-start-btn').className = "flex-1 bg-rose-600 hover:bg-rose-700 text-white font-semibold py-3 rounded-xl shadow-md shadow-rose-600/20 transition flex items-center justify-center space-x-2";
+            document.getElementById('timer-icon').className = "fa-solid fa-pause";
+            document.getElementById('timer-btn-text').textContent = "หยุดชั่วคราว";
+            document.getElementById('timer-status').textContent = "กำลังอบขนม...";
+
+            timerInterval = setInterval(() => {
+                if (totalSeconds > 0) {
+                    totalSeconds--;
+                    updateTimerDisplay();
+                } else {
+                    pauseTimer();
+                    document.getElementById('timer-status').textContent = "⏰ ครบเวลาแล้ว นำขนมออกจากเตาได้!";
+                    // Play subtle alert tone or vibration if supported
+                }
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            isRunning = false;
+            clearInterval(timerInterval);
+            document.getElementById('timer-start-btn').className = "flex-1 bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 rounded-xl shadow-md shadow-amber-600/20 transition flex items-center justify-center space-x-2";
+            document.getElementById('timer-icon').className = "fa-solid fa-play";
+            document.getElementById('timer-btn-text').textContent = "เริ่มจับเวลา";
+        }
+
+        function resetTimer() {
+            pauseTimer();
+            totalSeconds = 25 * 60;
+            updateTimerDisplay();
+            document.getElementById('timer-status').textContent = "พร้อมเริ่มอบ";
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize display
+        updateTimerDisplay();
+    </script>
+</body>
+</html>
